@@ -11,8 +11,7 @@ import com.up.mongoboot.repo.*;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-	@Autowire
-	d
+	@Autowired
 	OrganisationRepository repository;
 
 	@Autowired
