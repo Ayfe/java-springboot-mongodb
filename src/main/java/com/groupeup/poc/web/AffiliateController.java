@@ -58,6 +58,29 @@ public class AffiliateController {
 
         return resp;
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value="/erp/getAffiliates")
+    public AffiliateResponse getAffiliatesErp() {
+        List<Document> result = new ArrayList<>();
+        mongoClientERP.getDatabase("db-ldl-fr").getCollection("affiliates").find().into(result);
+
+        AffiliateResponse resp = new AffiliateResponse();
+        resp.response = result;
+
+        return resp;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value="/erp/affiliateByVat/{vat}")
+    public AffiliateResponse getAffiliateErpByVat(@PathVariable String vat) {
+        List<Document> result = new ArrayList<>();
+        mongoClientERP.getDatabase("db-ldl-fr").getCollection("affiliates").find(new Document("corporation.vat_number", vat)).into(result);
+
+        AffiliateResponse resp = new AffiliateResponse();
+        resp.response = result;
+
+        return resp;
+
+    }
 
     public static class AffiliateResponse {
         public List<Document> getResponse() {
