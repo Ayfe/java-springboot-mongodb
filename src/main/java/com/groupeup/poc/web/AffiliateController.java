@@ -1,6 +1,8 @@
 package com.groupeup.poc.web;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.model.Filters;
+
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -62,7 +64,7 @@ public class AffiliateController {
     @RequestMapping(method = RequestMethod.GET, value="/erp/getAffiliates")
     public AffiliateResponse getAffiliatesErp() {
         List<Document> result = new ArrayList<>();
-        mongoClientERP.getDatabase("db-ldl-fr").getCollection("affiliates").find().into(result);
+        mongoClientERP.getDatabase("db-ldl-fr").getCollection("affiliates").find(Filters.exists("_id")).into(result);
 
         AffiliateResponse resp = new AffiliateResponse();
         resp.response = result;
@@ -85,7 +87,7 @@ public class AffiliateController {
     @RequestMapping(method = RequestMethod.GET, value="/unknown/getAffiliates")
     public AffiliateResponse getAffiliatesUnknown() {
         List<Document> result = new ArrayList<>();
-        mongoClientUnknown.getDatabase("db-ldl-fr").getCollection("affiliates").find().into(result);
+        mongoClientUnknown.getDatabase("db-ldl-fr").getCollection("affiliates").find(Filters.exists("_id")).into(result);
 
         AffiliateResponse resp = new AffiliateResponse();
         resp.response = result;
