@@ -64,6 +64,27 @@ public class AffiliatesController {
         return resp;
     }
     
+    @RequestMapping(method = RequestMethod.GET, value="/cdr/v1/pbu/affiliates/siret/{siret}")
+    public AffiliateResponse getAffiliatePbu(@PathVariable String siret) {
+        List<Document> result = new ArrayList<>();
+        mongoClientPbu.getDatabase("db-ldl-fr").getCollection("affiliates").find(new Document("corporation.registration_number", siret)).into(result);
+
+        AffiliateResponse resp = new AffiliateResponse();
+        resp.response = result;
+        return resp;
+    }
+    
+    
+    @RequestMapping(method = RequestMethod.GET, value="/cdr/v1/pbu/affiliates/uid/{uuid}")
+    public AffiliateResponse getAffiliatePbuByUid(@PathVariable String uuid) {
+        List<Document> result = new ArrayList<>();
+        mongoClientPbu.getDatabase("db-ldl-fr").getCollection("affiliates").find(new Document("uuid", uuid)).into(result);
+
+        AffiliateResponse resp = new AffiliateResponse();
+        resp.response = result;
+        return resp;
+    }
+    
     @RequestMapping(method = RequestMethod.GET, value="/cdr/v1/pbu/affiliates")
     public AffiliateResponse getAffiliatesPbu() {
         List<Document> result = new ArrayList<>();
