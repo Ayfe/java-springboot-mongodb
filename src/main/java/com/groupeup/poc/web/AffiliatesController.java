@@ -25,6 +25,9 @@ public class AffiliatesController {
     @Autowired
     @Qualifier("Unknown")
     MongoClient mongoClientUnknown;
+    @Autowired
+    @Qualifier("PBU")
+    MongoClient mongoClientPbu;
 
 
     @RequestMapping(method = RequestMethod.GET, value="/cdr/v1/erp/affiliates/{siret}")
@@ -54,6 +57,17 @@ public class AffiliatesController {
     public AffiliateResponse getAffiliateUnknown(@PathVariable String siret) {
         List<Document> result = new ArrayList<>();
         mongoClientUnknown.getDatabase("db-ldl-fr").getCollection("affiliates").find(new Document("corporation.registration_number", siret)).into(result);
+
+        AffiliateResponse resp = new AffiliateResponse();
+        resp.response = result;
+
+        return resp;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value="/cdr/v1/pbu/affiliates")
+    public AffiliateResponse getAffiliatesPbu() {
+        List<Document> result = new ArrayList<>();
+        mongoClientPbu.getDatabase("db-ldl-fr").getCollection("affiliates").find(Filters.exists("_id")).into(result);
 
         AffiliateResponse resp = new AffiliateResponse();
         resp.response = result;

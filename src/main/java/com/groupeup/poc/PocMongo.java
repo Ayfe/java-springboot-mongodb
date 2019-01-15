@@ -34,4 +34,10 @@ public class PocMongo {
     MongoClient mongoClientTest() {
         return new MongoClient(new MongoClientURI("mongodb://_:t2UREzG10541qkt3grwF7eOtsdy3eBYQiIUnKRDJ7bMWTawlBT5m0WcLexVVMDc7@stitch.mongodb.com:27020/?authMechanism=PLAIN&authSource=%24external&ssl=true&appName=poccdr-sjnpm:mongodb-atlas:api-key"));
     }
+    
+    @Bean
+    @Qualifier("PBU")
+    MongoClient mongoClientTest() {
+        return new MongoClient(new MongoClientURI("mongodb://_:2iwkKddeFmSrX5mquQfF8QSvQ6sOJecpwjHdXCsooxiE5hwsK7JDzc6Zy4IAoOtR@stitch.mongodb.com:27020/?authMechanism=PLAIN&authSource=%24external&ssl=true&appName=poccdr-sjnpm:mongodb-atlas:api-key"));
+    }
 }
