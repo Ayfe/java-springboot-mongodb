@@ -37,7 +37,7 @@ public class PocMongo {
     
     @Bean
     @Qualifier("PBU")
-    MongoClient mongoClientTest() {
+    MongoClient mongoClientPbu() {
         return new MongoClient(new MongoClientURI("mongodb://_:2iwkKddeFmSrX5mquQfF8QSvQ6sOJecpwjHdXCsooxiE5hwsK7JDzc6Zy4IAoOtR@stitch.mongodb.com:27020/?authMechanism=PLAIN&authSource=%24external&ssl=true&appName=poccdr-sjnpm:mongodb-atlas:api-key"));
     }
 }
